@@ -1,13 +1,17 @@
-to add custom text fields on checkout page
 
+علشان تضيف حقل نصي custom في صفحة الـ checkout
+
+الرابط اللي فيه الشرح الأصلي:
 
 https://magento.stackexchange.com/questions/363873/magento2-4-5-how-to-add-custom-text-fields-on-checkout-page
 
-check this link and el-mola5as :
+الملخص:
 
-فنكريت layout file, "checkout_index_index.xml" في المسار دا view/frontend/layout
+➊ هتعمل ملف layout اسمه checkout_index_index.xml في المسار ده:
 
-الكود بتاعه اهو :
+view/frontend/layout
+
+الكود اللي جواه:
 
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
@@ -49,9 +53,13 @@ check this link and el-mola5as :
 </page>
 
 
-بعدين هتعلم ملف التمبلت  
+➋ بعدين هتعمل ملف template اسمه custom-field.html
 
-'custom-field.html' في المسار دا view/frontend/web/template ودا الكود جواه :
+في المسار ده:
+
+view/frontend/web/template
+
+وده الكود اللي جواه:
 
 <div class="field custom-field">
     <label class="label" for="custom-field">
@@ -62,8 +70,13 @@ check this link and el-mola5as :
     </div>
 </div>
 
+➌ وأخيرًا، هتعمل ملف JS اسمه custom-field.js
 
-واخيرا في المسار دا view/frontend/web/js/view/custom-field.js you can use knockout.js bindings to handle the custom field value ودا الكود جواه :
+في المسار ده:
+
+view/frontend/web/js/view
+
+وده الكود اللي جواه وبيستخدم Knockout.js:
 
 define(
     [
@@ -81,15 +94,9 @@ define(
                     .observe('custom_field');
                 return this;
             },
-            /**
-             * Send value to the quote
-             */
             getCustomFieldValue: function () {
                 return this.custom_field();
             },
-            /**
-             * Send value to the quote
-             */
             setCustomFieldValue: function (value) {
                 this.custom_field(value);
             },
