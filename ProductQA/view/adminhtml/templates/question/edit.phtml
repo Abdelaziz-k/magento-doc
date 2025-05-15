@@ -1,0 +1,55 @@
+<?php
+/** @var \Magentoready\ProductQA\Block\Adminhtml\Question\Edit $block */
+$model = $block->getQuestion();
+?>
+
+<?php if ($model): ?>
+    <form action="<?= $block->getSaveUrl() ?>" method="post">
+        <?= $block->getBlockHtml('formkey') ?>
+        <input type="hidden" name="id" value="<?= $model->getId() ?>" />
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="customer_name">Customer Name</label>
+            <div class="admin__field-control">
+                <input type="text" name="customer_name" id="customer_name" value="<?= $block->escapeHtml($model->getCustomerName()) ?>" class="admin__control-text"/>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="customer_email">Customer Email</label>
+            <div class="admin__field-control">
+                <input type="email" name="customer_email" id="customer_email" value="<?= $block->escapeHtml($model->getCustomerEmail()) ?>" class="admin__control-text"/>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="question_text">Question</label>
+            <div class="admin__field-control">
+                <textarea name="question_text" id="question_text" rows="4" class="admin__control-text"><?= $block->escapeHtml($model->getQuestionText()) ?></textarea>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="answer_text">Answer</label>
+            <div class="admin__field-control">
+                <textarea name="answer_text" id="answer_text" rows="4" class="admin__control-text"><?= $block->escapeHtml($model->getAnswerText()) ?></textarea>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <label class="admin__field-label" for="is_approved">Approved?</label>
+            <div class="admin__field-control">
+                <select name="is_approved" id="is_approved" class="admin__control-select">
+                    <option value="1" <?= $model->getIsApproved() == 1 ? 'selected' : '' ?>>Yes</option>
+                    <option value="0" <?= $model->getIsApproved() == 0 ? 'selected' : '' ?>>No</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="admin__field">
+            <button type="submit" class="action-primary"><span><?= __('Save') ?></span></button>
+        </div>
+    </form>
+<?php else: ?>
+    <p><?= __('Question not found.') ?></p>
+<?php endif; ?>

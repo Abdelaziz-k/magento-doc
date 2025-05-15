@@ -1,0 +1,36 @@
+<form action="<?= $block->getFormAction() ?>" method="POST">
+    <input type="hidden" name="product_id" value="<?= $block->escapeHtml($block->getProduct()->getId()) ?>" />
+    
+    <div>
+        <label for="customer_name">Your Name:</label><br>
+        <input type="text" name="customer_name" required />
+    </div>
+    
+    <div>
+        <label for="customer_email">Your Email:</label><br>
+        <input type="email" name="customer_email" required />
+    </div>
+
+    <div>
+        <label for="question_text">Your Question:</label><br>
+        <textarea name="question_text" rows="4" required></textarea>
+    </div>
+
+    <div>
+        <button type="submit">Submit Question</button>
+    </div>
+</form>
+
+<hr>
+
+<h3>Questions & Answers</h3>
+<?php foreach ($block->getApprovedQuestions() as $question): ?>
+    <div style="margin-bottom: 20px;">
+        <p><strong><?= $block->escapeHtml($question->getCustomerName()) ?> asked:</strong></p>
+        <p><?= nl2br($block->escapeHtml($question->getQuestionText())) ?></p>
+
+        <?php if ($question->getAnswerText()): ?>
+            <p><em><strong>Answer:</strong> <?= nl2br($block->escapeHtml($question->getAnswerText())) ?></em></p>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>
